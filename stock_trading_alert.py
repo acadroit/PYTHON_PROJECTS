@@ -60,15 +60,16 @@ if abs(DIFF_PERCENT) >= 1:
     LATEST_THREE_NEWS=news_update[:3]
     
     print(LATEST_THREE_NEWS)
-
+    
     #Creating a new list of the first 3 article's headline and description using list comprehension.
-    formatted_articles = [f"{STOCK_NAME}: {UP_DOWN}{DIFF_PERCENT}%\nHeadline: {article['title']}. \nBrief: {article['description']}" for article in LATEST_THREE_NEWS]
-    print(formatted_articles)
+    
+    FORMATTED_ARTICLES = [f"{STOCK_NAME}: {UP_DOWN}{DIFF_PERCENT}%\nHeadline: {article['title']}. \nBrief: {article['description']}" for article in LATEST_THREE_NEWS]
+    print(FORMATTED_ARTICLES)
     #Sending each article as a separate message via Twilio.
     CLIENT = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
 
     #Sending each article as a separate message via Twilio.
-    for article in formatted_articles:
+    for article in FORMATTED_ARTICLES:
         message = CLIENT.messages.create(
             body=article,
             from_=VIRTUAL_TWILIO_NUMBER,
